@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "golden-pendulum-mtl"
-version = "0.1.0"
+version = "0.2.0"
 description = "Golden Pendulum MTL: Anti-resonance equilibria for gradient balancing in multi-task learning"
 readme = "README.md"
 license = "Apache-2.0"
@@ -25,7 +25,6 @@ keywords = [
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Science/Research",
-    "License :: OSI Approved :: Apache Software License",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
@@ -45,11 +44,14 @@ dev = [
     "ruff",
     "mypy",
 ]
+pro = [
+    "golden-pendulum-mtl",
+]
 lightning = [
     "pytorch-lightning>=2.0",
 ]
 all = [
-    "golden-pendulum-mtl[dev,lightning]",
+    "golden-pendulum-mtl[dev,pro,lightning]",
 ]
 
 [project.urls]

@@ -181,6 +181,98 @@ Functional API &mdash; same algorithm, no state tracking.
 
 Returns the &phi;-spaced target weights for K tasks.
 
+## Pro Features
+
+Advanced capabilities for production multi-task training.
+
+### AdaptiveLambda — Auto-tune regularization
+
+No more manual lambda tuning. Adapts based on real-time gradient conflict severity and loss magnitude disparity.
+
+```python
+from golden_pendulum.pro import AdaptiveLambda
+
+adaptive = AdaptiveLambda(lam_init=0.5, lam_min=0.05, lam_max=2.0)
+
+for step, batch in enumerate(loader):
+    optimizer.zero_grad()
+    losses = compute_losses(model, batch)
+    weights = adaptive.backward(losses, model)
+    optimizer.step()
+    # Lambda auto-adjusts: high conflict -> stronger regularization
+```
+
+### CurriculumScheduler — Multi-phase training
+
+Manages Phase A/B/C/D training with automatic backbone freeze/unfreeze.
+
+```python
+from golden_pendulum.pro import CurriculumScheduler, Phase
+
+curriculum = CurriculumScheduler(
+    phases=[
+        Phase("A_ranking", tasks={"returns", "rank", "quality", "embed"},
+              steps=15000, freeze_backbone=False, lam=0.5, lr=5e-5),
+        Phase("B_risk", tasks={"vol", "mae", "kelly", "risk"},
+              steps=10000, freeze_backbone=True, lam=0.3, lr=1e-4),
+        Phase("C_meta", tasks={"regime", "calibration", "confidence"},
+              steps=10000, freeze_backbone=True, lam=0.3, lr=1e-4),
+    ],
+    backbone_params=lambda model: model.backbone.parameters(),
+)
+
+while not curriculum.is_complete:
+    weights = curriculum.backward(all_losses, model)
+    optimizer.step()
+    curriculum.step(model)  # Auto-freezes backbone at phase transitions
+```
+
+### DynamicK — Hierarchical task grouping
+
+Group tasks by function, run Golden Pendulum within and across groups. Reduces O(K^2) cost for K=16+ tasks.
+
+```python
+from golden_pendulum.pro import DynamicK, TaskGroup
+
+dk = DynamicK(groups=[
+    TaskGroup("ranking", tasks={"returns", "rank", "quality"}),
+    TaskGroup("risk", tasks={"vol", "mae", "kelly", "risk"}),
+    TaskGroup("meta", tasks={"regime", "calibration", "confidence"}),
+])
+weights = dk.backward(all_16_losses, model)
+
+# Or auto-group by gradient similarity:
+dk = DynamicK(auto_group=True, similarity_threshold=0.5)
+```
+
+### DiagnosticsEngine — Real-time conflict analysis
+
+Deep visibility into gradient conflicts, resonance detection, and convergence monitoring.
+
+```python
+from golden_pendulum.pro import DiagnosticsEngine
+
+diag = DiagnosticsEngine()
+report = diag.analyze(losses, model)
+print(f"Conflict ratio: {report.conflict_ratio}")
+print(f"Norm ratio: {report.norm_ratio}x")
+print(f"Conflicting pairs: {report.conflict_pairs}")
+if diag.alerts:
+    for alert in diag.alerts:
+        print(f"ALERT: {alert}")
+```
+
+### Presets — Battle-tested configurations
+
+```python
+from golden_pendulum.pro import get_preset, list_presets
+
+list_presets()  # finance_4phase, finance_quick, nlp_multitask, vision_multitask, robotics_control
+
+preset = get_preset("finance_4phase")  # Paper's exact configuration
+scheduler = CurriculumScheduler(phases=preset.phases)
+```
+
 ## Benchmarks
 
 ```bash

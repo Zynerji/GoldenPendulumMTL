@@ -29,7 +29,7 @@ from golden_pendulum.callbacks import (
     WeightLogger,
 )
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 __author__ = "Christian Knopp"
 __email__ = "cknopp@gmail.com"
 
@@ -40,3 +40,10 @@ __all__ = [
     "GoldenPendulumCallback",
     "WeightLogger",
 ]
+
+# Pro tier — lazy import to avoid hard dependency
+def __getattr__(name):
+    if name == "pro":
+        from golden_pendulum import pro as _pro
+        return _pro
+    raise AttributeError(f"module 'golden_pendulum' has no attribute {name!r}")
