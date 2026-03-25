@@ -1,5 +1,10 @@
 # Golden Pendulum MTL
 
+[![PyPI version](https://img.shields.io/pypi/v/golden-pendulum-mtl)](https://pypi.org/project/golden-pendulum-mtl/)
+[![License](https://img.shields.io/badge/license-Apache%202.0-blue)](LICENSE)
+[![Python](https://img.shields.io/badge/python-3.9%2B-blue)](https://www.python.org/)
+[![Tests](https://img.shields.io/github/actions/workflow/status/Zynerji/GoldenPendulumMTL/ci.yml?label=tests)](https://github.com/Zynerji/GoldenPendulumMTL/actions)
+
 **Anti-resonance equilibria for gradient balancing in multi-task learning.**
 
 Replace Nash-MTL corner solutions with golden-ratio (&phi;) weights that prevent harmonic lock-in between competing task gradients.
@@ -310,6 +315,10 @@ See [`paper/golden_pendulum_mtl.pdf`](paper/golden_pendulum_mtl.pdf) for the ful
   year={2026}
 }
 ```
+
+## Author
+
+**Christian Knopp** &mdash; [@Conceptual1](https://x.com/Conceptual1) &mdash; [cknopp@gmail.com](mailto:cknopp@gmail.com)
 
 ## License
 
