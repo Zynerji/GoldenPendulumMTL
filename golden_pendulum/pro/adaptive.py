@@ -108,7 +108,7 @@ class AdaptiveLambda:
     @property
     def loss_ratio(self) -> float:
         """EMA of max_loss / min_loss magnitude ratio."""
-        return self._loss_ratio_ema
+        return float(self._loss_ratio_ema)
 
     def _compute_conflict_ratio(self, GTG: Tensor) -> float:
         """Fraction of off-diagonal entries in GTG that are negative."""
@@ -121,7 +121,7 @@ class AdaptiveLambda:
             for j in range(i + 1, n):
                 if GTG[i, j] < 0:
                     n_conflicts += 1
-        return n_conflicts / n_pairs
+        return float(n_conflicts / n_pairs)
 
     def _update_lambda(self, conflict_ratio: float, loss_ratio: float) -> None:
         """Adapt lambda based on conflict severity and loss disparity."""
