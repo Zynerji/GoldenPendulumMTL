@@ -1,0 +1,78 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "golden-pendulum-mtl"
+version = "0.1.0"
+description = "Golden Pendulum MTL: Anti-resonance equilibria for gradient balancing in multi-task learning"
+readme = "README.md"
+license = "Apache-2.0"
+requires-python = ">=3.8"
+authors = [
+    {name = "Christian Knopp", email = "cknopp@gmail.com"},
+]
+keywords = [
+    "multi-task-learning",
+    "gradient-balancing",
+    "golden-ratio",
+    "nash-mtl",
+    "pcgrad",
+    "transformer",
+    "deep-learning",
+    "pytorch",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "torch>=1.12.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov",
+    "ruff",
+    "mypy",
+]
+lightning = [
+    "pytorch-lightning>=2.0",
+]
+all = [
+    "golden-pendulum-mtl[dev,lightning]",
+]
+
+[project.urls]
+Homepage = "https://github.com/Zynerji/GoldenPendulumMTL"
+Documentation = "https://github.com/Zynerji/GoldenPendulumMTL#readme"
+Repository = "https://github.com/Zynerji/GoldenPendulumMTL"
+Issues = "https://github.com/Zynerji/GoldenPendulumMTL/issues"
+
+[tool.setuptools.packages.find]
+include = ["golden_pendulum*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v --tb=short"
+
+[tool.ruff]
+target-version = "py38"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W"]
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
