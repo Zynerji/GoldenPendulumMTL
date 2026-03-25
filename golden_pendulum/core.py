@@ -13,7 +13,7 @@ Algorithm 1 from Knopp (2026):
 from __future__ import annotations
 
 import math
-from typing import Dict, List, Optional, Sequence, Union
+from typing import Dict, List, Optional, Union
 
 import torch
 import torch.nn as nn
@@ -228,7 +228,6 @@ def golden_nash_backward(
         raise ValueError("No parameters with requires_grad=True found in model")
 
     device = shared_params[0].device
-    dtype = shared_params[0].dtype if shared_params[0].is_floating_point() else torch.float32
 
     # Step 1: Collect per-task gradients
     G = _collect_task_gradients(losses, shared_params)

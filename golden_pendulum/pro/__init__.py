@@ -11,9 +11,9 @@ Pro features require: pip install golden-pendulum-mtl[pro]
 """
 
 from golden_pendulum.pro.adaptive import AdaptiveLambda
-from golden_pendulum.pro.dynamic_k import DynamicK, TaskGroup
 from golden_pendulum.pro.curriculum import CurriculumScheduler, Phase
-from golden_pendulum.pro.diagnostics import DiagnosticsEngine, ConflictReport
+from golden_pendulum.pro.diagnostics import ConflictReport, DiagnosticsEngine
+from golden_pendulum.pro.dynamic_k import DynamicK, TaskGroup
 from golden_pendulum.pro.presets import FinancePreset, get_preset, list_presets
 
 __all__ = [

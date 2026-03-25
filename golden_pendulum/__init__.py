@@ -19,14 +19,14 @@ Reference:
     for Gradient Balancing in Multi-Head Transformer Training."
 """
 
-from golden_pendulum.core import (
-    GoldenPendulumMTL,
-    golden_ratio_weights,
-    golden_nash_backward,
-)
 from golden_pendulum.callbacks import (
     GoldenPendulumCallback,
     WeightLogger,
+)
+from golden_pendulum.core import (
+    GoldenPendulumMTL,
+    golden_nash_backward,
+    golden_ratio_weights,
 )
 
 __version__ = "0.2.0"

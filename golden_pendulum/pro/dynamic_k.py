@@ -10,9 +10,8 @@ tasks to be added/removed dynamically during training (e.g., curriculum phases).
 
 from __future__ import annotations
 
-import math
 from dataclasses import dataclass, field
-from typing import Dict, FrozenSet, List, Optional, Set, Tuple
+from typing import Dict, List, Optional, Set
 
 import torch
 import torch.nn as nn
@@ -68,7 +67,8 @@ class DynamicK:
         from golden_pendulum.pro import DynamicK, TaskGroup
 
         dk = DynamicK(groups=[
-            TaskGroup("ranking", tasks={"horizon_returns", "short_rank", "trade_quality", "embedding"}),
+            TaskGroup("ranking",
+                      tasks={"horizon_returns", "short_rank", "trade_quality", "embedding"}),
             TaskGroup("risk", tasks={"vol_forecast", "mae", "kelly", "risk_score"}),
             TaskGroup("meta", tasks={"regime", "calibration", "confidence", "optimal_exit"}),
         ])
@@ -150,7 +150,9 @@ class DynamicK:
 
         return groups
 
-    def _ensure_groups(self, task_names: List[str], G_hat: Optional[Tensor] = None) -> List[TaskGroup]:
+    def _ensure_groups(
+        self, task_names: List[str], G_hat: Optional[Tensor] = None,
+    ) -> List[TaskGroup]:
         """Ensure groups are set up, auto-clustering if needed."""
         if self.auto_group and G_hat is not None:
             if self._step % self.regroup_every == 0 or not self._groups:

@@ -9,15 +9,14 @@ Provides deep visibility into multi-task training dynamics:
 
 from __future__ import annotations
 
-import math
 from collections import deque
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Dict, List, Optional, Tuple
 
 import torch
 from torch import Tensor
 
-from golden_pendulum.core import PHI, golden_ratio_weights
+from golden_pendulum.core import golden_ratio_weights
 
 
 @dataclass

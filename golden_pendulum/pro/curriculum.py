@@ -13,10 +13,9 @@ freeze state. The scheduler handles transitions automatically.
 from __future__ import annotations
 
 import logging
-from dataclasses import dataclass, field
-from typing import Any, Callable, Dict, List, Optional, Set
+from dataclasses import dataclass
+from typing import Callable, Dict, List, Optional, Set
 
-import torch
 import torch.nn as nn
 from torch import Tensor
 

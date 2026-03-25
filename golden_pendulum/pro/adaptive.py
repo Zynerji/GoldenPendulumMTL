@@ -11,15 +11,12 @@ This replaces manual lambda tuning — the #1 hyperparameter question.
 from __future__ import annotations
 
 import math
-from collections import deque
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, List, Optional
 
-import torch
 import torch.nn as nn
 from torch import Tensor
 
 from golden_pendulum.core import (
-    PHI,
     _collect_task_gradients,
     _pcgrad_resolve,
     _solve_golden_qp,

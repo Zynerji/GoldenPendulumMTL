@@ -7,9 +7,9 @@ so users don't have to tune hyperparameters from scratch.
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import Dict, Optional, Set
+from typing import Dict
 
-from golden_pendulum.pro.curriculum import CurriculumScheduler, Phase
+from golden_pendulum.pro.curriculum import Phase
 
 
 @dataclass
