@@ -77,3 +77,8 @@ select = ["E", "F", "I", "W"]
 python_version = "3.9"
 warn_return_any = true
 warn_unused_configs = true
+
+[[tool.mypy.overrides]]
+module = "torch.*"
+ignore_errors = true
+follow_imports = "skip"

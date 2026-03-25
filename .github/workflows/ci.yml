@@ -30,7 +30,7 @@ jobs:
         run: pytest tests/ -v --tb=short
 
       - name: Type check
-        run: mypy golden_pendulum/ --ignore-missing-imports
+        run: mypy golden_pendulum/ --ignore-missing-imports --exclude '\.venv'
 
       - name: Lint
         run: ruff check golden_pendulum/
